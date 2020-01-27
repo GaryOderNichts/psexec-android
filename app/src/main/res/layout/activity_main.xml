@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter IP:"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/pcname"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter IP here..."
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter Program:"
+        app:layout_constraintTop_toBottomOf="@+id/username"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/programname"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter the Programname here"
+        android:inputType="textPersonName"
+        android:text="cmd.exe"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Enter args.:"
+        app:layout_constraintTop_toBottomOf="@+id/programname"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <EditText
+        android:id="@+id/args"
+        android:layout_width="360dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter program args here..."
+        android:inputType="textPersonName"
+        android:text="/k echo Hello World"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <Button
+        android:id="@+id/runbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="runExec"
+        android:text="Run"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <CheckBox
+        android:id="@+id/useencryption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Use encryption?"
+        app:layout_constraintTop_toBottomOf="@+id/args"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <CheckBox
+        android:id="@+id/usesysacc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="Use sysacc?"
+        app:layout_constraintTop_toBottomOf="@+id/useencryption"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <CheckBox
+        android:id="@+id/interactbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:text="interact?"
+        app:layout_constraintTop_toBottomOf="@+id/usesysacc"
+        tools:layout_editor_absoluteX="2dp" />
+
+    <EditText
+        android:id="@+id/interactid"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="id"
+        android:inputType="numberSigned"
+        android:text="1"
+        app:layout_constraintBottom_toBottomOf="@+id/interactbox"
+        app:layout_constraintStart_toEndOf="@+id/interactbox"
+        app:layout_constraintTop_toBottomOf="@+id/usesysacc" />
+
+    <CheckBox
+        android:id="@+id/asynch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="asynch?"
+        app:layout_constraintTop_toBottomOf="@+id/interactbox"
+        tools:layout_editor_absoluteX="3dp" />
+
+    <Button
+        android:id="@+id/savebutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="saveButton"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.96" />
+
+    <Button
+        android:id="@+id/loadbutton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="loadButton"
+        android:text="Load"
+        app:layout_constraintStart_toEndOf="@+id/savebutton"
+        app:layout_constraintTop_toTopOf="@+id/savebutton" />
+
+    <EditText
+        android:id="@+id/saveloadtext"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name"
+        app:layout_constraintBottom_toTopOf="@+id/savebutton"
+        app:layout_constraintStart_toStartOf="@+id/savebutton" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login:"
+        app:layout_constraintTop_toBottomOf="@+id/pcname"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter username here..."
+        android:inputType="textPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/password"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Enter password here..."
+        android:inputType="textPassword"
+        app:layout_constraintBottom_toBottomOf="@+id/username"
+        app:layout_constraintStart_toEndOf="@+id/username"
+        app:layout_constraintTop_toTopOf="@+id/username" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
