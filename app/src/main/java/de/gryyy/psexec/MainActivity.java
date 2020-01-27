@@ -163,8 +163,8 @@ public class MainActivity extends AppCompatActivity
         byte[] prgnamedata = programnametxt.getBytes(StandardCharsets.UTF_8);
         byte[] argsdata = argstxt.getBytes(StandardCharsets.UTF_8);
 
-        String programname = Base64.encodeToString(prgnamedata, Base64.DEFAULT);
-        String args = Base64.encodeToString(argsdata, Base64.DEFAULT);
+        String programname = Base64.encodeToString(prgnamedata, Base64.NO_WRAP);
+        String args = Base64.encodeToString(argsdata, Base64.NO_WRAP);
 
         CheckBox sysaccBox = findViewById(R.id.usesysacc);
         String usesysacc = sysaccBox.isChecked() ? "True" : "False";
