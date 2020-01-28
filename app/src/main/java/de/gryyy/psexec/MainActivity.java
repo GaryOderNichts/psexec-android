@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.system.ErrnoException;
 import android.system.Os;
@@ -39,11 +41,27 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPref = getSharedPreferences("psexecPrefs", MODE_PRIVATE);
+
         boolean firstStart = sharedPref.getBoolean("firstStart", true);
+        int CurrentAppVersionCode = 1;
+        if (!firstStart) {
+            try {
+                PackageInfo pInfo = getApplicationContext().getPackageManager().getPackageInfo(getPackageName(), 0);
+                CurrentAppVersionCode = pInfo.versionCode;
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
+            }
+
+            int SavedAppVersionCode = sharedPref.getInt("AppVersionCode", 1);
+            if (SavedAppVersionCode != CurrentAppVersionCode) {
+                firstStart = true;
+            }
+        }
 
         // only run setup on first start
         if (firstStart) {
             runSetup();
+            sharedPref.edit().putInt("AppVersionCode", CurrentAppVersionCode).apply();
         }
     }
 
@@ -178,10 +196,10 @@ public class MainActivity extends AppCompatActivity
         CheckBox encryptBox = findViewById(R.id.useencryption);
         String encrypt = encryptBox.isChecked() ? "True" : "False";
 
-        CheckBox asynchBox = findViewById(R.id.asynch);
-        String asynch = asynchBox.isChecked() ? "True" : "False";
+        //CheckBox asynchBox = findViewById(R.id.asynch);
+        String asynch = "True";//asynchBox.isChecked() ? "True" : "False";
 
-        String command = "sh " + getApplicationContext().getFilesDir().getPath() + "/bin/standalone_python.sh " + getApplicationContext().getFilesDir().getPath() + "/pypsexecparser.py " + pcname + " " + username + " " + password + " " + programname + " --arguments " + args + " --s " + usesysacc + " --i " + interact + " --isession " + interactid + " --encrypt " + encrypt + " --asynch " + asynch;
+        String command = "sh " + getApplicationContext().getFilesDir().getPath() + "/bin/standalone_python.sh " + getApplicationContext().getFilesDir().getPath() + "/pypsexecparser.py " + pcname + " " + username + " " + password + " " + programname + (!args.isEmpty() ? " --arguments " + args : "") + " --s " + usesysacc + " --i " + interact + " --isession " + interactid + " --encrypt " + encrypt + " --asynch " + asynch;
 
         String output;
 
@@ -190,7 +208,6 @@ public class MainActivity extends AppCompatActivity
             Process execute = Runtime.getRuntime().exec(command);
             output = readFully(execute.getInputStream()) + readFully(execute.getErrorStream());
         } catch (Exception e) { throw new RuntimeException(e); }
-
 
         // start the new intent and pass the output to it
         Intent intent = new Intent(this, DisplayOutputActivity.class);
@@ -231,8 +248,8 @@ public class MainActivity extends AppCompatActivity
         CheckBox encryptBox = findViewById(R.id.useencryption);
         String encrypt = encryptBox.isChecked() ? "True" : "False";
 
-        CheckBox asynchBox = findViewById(R.id.asynch);
-        String asynch = asynchBox.isChecked() ? "True" : "False";
+        //CheckBox asynchBox = findViewById(R.id.asynch);
+        String asynch = "True";//asynchBox.isChecked() ? "True" : "False";
 
         SharedPreferences sharedPref = getSharedPreferences("psexecPrefs", MODE_PRIVATE);
 
@@ -284,8 +301,8 @@ public class MainActivity extends AppCompatActivity
             CheckBox encryptBox = findViewById(R.id.useencryption);
             encryptBox.setChecked(Boolean.parseBoolean(DataArray[8]));
 
-            CheckBox asynchBox = findViewById(R.id.asynch);
-            asynchBox.setChecked(Boolean.parseBoolean(DataArray[9]));
+            //CheckBox asynchBox = findViewById(R.id.asynch);
+            //asynchBox.setChecked(Boolean.parseBoolean(DataArray[9]));
         }
         else {
             Context context = getApplicationContext();

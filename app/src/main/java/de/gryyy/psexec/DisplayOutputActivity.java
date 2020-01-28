@@ -26,6 +26,5 @@ public class DisplayOutputActivity extends AppCompatActivity {
         TextView cmdtextView = findViewById(R.id.commandTextView);
         cmdtextView.setText(command);
         cmdtextView.setMovementMethod(new ScrollingMovementMethod());
-
     }
 }
